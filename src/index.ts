@@ -13,6 +13,11 @@ if (planets) {
     const item = document.createElement("li") as HTMLLIElement;
 
     item.textContent = planet.name;
+    item.addEventListener('click', async () => {
+      const p = await client.planets.getPlanetById.query(planet.id);
+
+      console.log('You clicked planet => ', { p });
+    })
 
     planetsList.appendChild(item);
   });

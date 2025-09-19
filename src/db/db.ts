@@ -23,6 +23,7 @@ type Planet = {
 
 // fake data
 const planets = (await import("./planets.json", { with: { type: "json" } })).default;
+
 // start an in memory DB
 const database = new DatabaseSync(':memory:');
 
@@ -49,7 +50,8 @@ planets.forEach((planet) => {
 });
 
 const db = {
-  getPlanets: () => Object.values(database.prepare('SELECT * FROM planets ORDER BY id').all() as Planet[])
+  getPlanets: () => Object.values(database.prepare('SELECT * FROM planets ORDER BY id').all() as Planet[]),
+  getPlanetById: (id: number) => database.prepare(`SELECT * FROM planets WHERE id=${id}`).all()[0] as Planet
 }
 
 export { db };
