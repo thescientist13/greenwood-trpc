@@ -1,5 +1,4 @@
 import { initTRPC } from '@trpc/server';
-import { z } from 'zod';
 import { db } from "../db/db.ts";
 
 const t = initTRPC.create();

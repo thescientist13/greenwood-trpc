@@ -9,7 +9,7 @@ if (planets) {
     "planets-list",
   ) as HTMLOListElement;
 
-  planets.default.forEach((planet, idx) => {
+  planets.forEach((planet) => {
     const item = document.createElement("li") as HTMLLIElement;
 
     item.textContent = planet.name;
