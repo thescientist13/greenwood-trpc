@@ -1,10 +1,6 @@
 import { z } from "zod";
 import { DatabaseSync } from 'node:sqlite';
 
-// fake data
-const planets = (await import("./planets.json", { with: { type: "json" } })).default;
-const database = new DatabaseSync(':memory:');
-
 type Planet = {
   id: number;
   position: number;
@@ -15,11 +11,25 @@ type Planet = {
   description: string;
 }
 
-// Execute SQL statements from strings.
-// TODO why does PRIMARY KEY fail here?
+// const PlanetSchema = z.array(z.object({
+//   id: z.number().int().min(1),
+//   position: z.number().int().min(1),
+//   name: z.string(),
+//   description: z.string(),
+//   velocity: z.number().int(),
+//   distance: z.number().int(),
+//   image: z.string(),
+// }));
+
+// fake data
+const planets = (await import("./planets.json", { with: { type: "json" } })).default;
+// start an in memory DB
+const database = new DatabaseSync(':memory:');
+
+// create the planets table
 database.exec(`
   CREATE TABLE planets(
-    id INTEGER,
+    id INTEGER PRIMARY KEY,
     position INTEGER,
     name TEXT,
     image TEXT,
@@ -29,24 +39,14 @@ database.exec(`
   ) STRICT
 `);
 
-// Create a prepared statement to insert data into the database.
-// TODO: generate keys / placeholders dynamically
-const insert = database.prepare('INSERT INTO planets (id, position, name, image, velocity, distance, description) VALUES (?, ?, ?, ?, ?, ?, ?)');
+// Create a prepared statement to insert data into the database
+const columns = Object.keys(planets[0]);
+const insert = database.prepare(`INSERT INTO planets (${columns.join(', ')}) VALUES (${columns.map(c => '?').join(', ')})`);
 
-// Execute the prepared statement with bound values.
+// loop over all planets and execute the prepared statement with bound values for each entry
 planets.forEach((planet) => {
   insert.run(...Object.values(planet));
 });
-
-const PlanetSchema = z.array(z.object({
-  id: z.number().int().min(1),
-  position: z.number().int().min(1),
-  name: z.string(),
-  description: z.string(),
-  velocity: z.number().int(),
-  distance: z.number().int(),
-  image: z.string(),
-}));
 
 const db = {
   getPlanets: () => Object.values(database.prepare('SELECT * FROM planets ORDER BY id').all() as Planet[])

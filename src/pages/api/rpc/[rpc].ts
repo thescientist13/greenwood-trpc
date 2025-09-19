@@ -8,7 +8,5 @@ export async function handler(request: Request): Promise<Response> {
     router: appRouter,
   });
 
-  console.log({ response });
-
   return response;
 }
