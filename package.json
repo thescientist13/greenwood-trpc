@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@greenwood/cli": "~0.34.0-alpha.2",
+    "@greenwood/plugin-adapter-vercel": "^0.34.0-alpha.2",
     "typescript": "^5.8.0"
   }
 }
