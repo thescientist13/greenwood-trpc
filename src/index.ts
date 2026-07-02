@@ -4,16 +4,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   const planets = await client.planets.listPlanets.query();
   const modal: HTMLDialogElement | null = document.querySelector('dialog');
   const closeButton = modal?.querySelector('button');
-  console.log({ client, planets });
+  const content = modal?.querySelector('#content');
+  const name = modal?.querySelector('#name') as HTMLHeadingElement;
+  const image = modal?.querySelector('#image') as HTMLImageElement;
+  console.table(planets);
 
   closeButton?.addEventListener('click', () => {
     modal?.close();
+    image.src = '';
+    name.textContent = '';
+    content!.textContent = '';
   });
 
   if (planets) {
-    const planetsList = document.getElementById(
-      "planets-list",
-    ) as HTMLOListElement;
+    const planetsList = document.getElementById("planets-list") as HTMLOListElement;
 
     planets.forEach((planet) => {
       const item = document.createElement("li") as HTMLLIElement;
@@ -21,10 +25,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       item.textContent = planet.name;
       item.addEventListener('click', async () => {
         const p = await client.planets.getPlanetById.query(planet.id);
-        console.log('You clicked planet => ', { p });
 
         if (modal) {
-          modal.querySelector('#content')!.textContent = p?.description ?? '';
+          name.textContent = p?.name ?? '';
+          content!.textContent = p?.description ?? '';
+          image.src = p?.image ?? '';
           modal.showModal();
         }
       })

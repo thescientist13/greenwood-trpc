@@ -43,8 +43,20 @@ dialog {
   overflow-x: hidden;
 }
 
+img {
+  display: block;
+  max-width: 200px;
+  min-height: 200px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-decoration: underline;
+  font-style: bold
+}
+
 p {
-  font-size: 1.85rem;
+  font-size: 1.25rem;
 }
 
 button {
