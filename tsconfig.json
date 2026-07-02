@@ -11,6 +11,7 @@
     "skipLibCheck": true,
     "noEmit": true,
     "strict": true,
+    "types": ["node"],
   },
   "exclude": ["./public/", "./greenwood/", "node_modules"]
 }
