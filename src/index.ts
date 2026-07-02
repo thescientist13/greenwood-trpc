@@ -1,6 +1,5 @@
 import { client } from './trpc/client.ts'
 
-
 document.addEventListener('DOMContentLoaded', async () => {
   const planets = await client.planets.listPlanets.query();
   const modal: HTMLDialogElement | null = document.querySelector('dialog');

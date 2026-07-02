@@ -1,4 +1,3 @@
-import { z } from "zod";
 import { DatabaseSync } from 'node:sqlite';
 
 type Planet = {
