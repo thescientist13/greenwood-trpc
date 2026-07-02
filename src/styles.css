@@ -60,4 +60,8 @@ button {
   dialog {
     width: 80%;
   }
+
+  p {
+    font-size: 1.00rem;
+  }
 }
