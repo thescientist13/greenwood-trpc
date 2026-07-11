@@ -1,50 +1,26 @@
 <!doctype html>
 <html lang="en" prefix="og:http://ogp.me/ns#">
   <head>
-    <title>Greenwood <> tRPC</title>
+    <title>Greenwood + tRPC</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="icon" href="/favicon.ico" />
-
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="stylesheet" href="../styles.css" />
     <script type="module" src="../index.ts"></script>
-    <style>
-      :root {
-        --font-primary:
-          system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-      }
-
-      body {
-        font-family: var(--font-primary);
-        margin: 0;
-        overflow: hidden;
-      }
-
-      main {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 2rem;
-        text-align: center;
-      }
-
-      ol {
-        width: fit-content;
-        margin: 0 auto;
-        font-size: 24px;
-        cursor: pointer;
-      }
-
-      .trpc {
-        color: rgba(14,165,233,.75);
-      }
-    </style>
   </head>
 
   <body>
     <main>
-      <h1>Greenwood and <span class="trpc">tRPC</span></h1>
+      <h1>Greenwood + <span class="trpc">tRPC</span></h1>
       <ol id="planets-list"></ol>
+
+      <dialog>
+        <img id="image" />
+        <h2 id="name"></h2>
+        <p id="content"></p>
+        <button autofocus>Close</button>
+      </dialog>
     </main>
   </body>
 </html>

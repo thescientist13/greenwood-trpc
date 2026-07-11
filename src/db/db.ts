@@ -1,4 +1,3 @@
-import { z } from "zod";
 import { DatabaseSync } from 'node:sqlite';
 
 type Planet = {
@@ -11,17 +10,7 @@ type Planet = {
   description: string;
 }
 
-// const PlanetSchema = z.array(z.object({
-//   id: z.number().int().min(1),
-//   position: z.number().int().min(1),
-//   name: z.string(),
-//   description: z.string(),
-//   velocity: z.number().int(),
-//   distance: z.number().int(),
-//   image: z.string(),
-// }));
-
-// fake data
+// data source
 const planets = (await import("./planets.json", { with: { type: "json" } })).default;
 
 // start an in memory DB
